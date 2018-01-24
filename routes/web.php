@@ -11,5 +11,6 @@
 |
 */
 $router->group(['prefix' => 'api'], function () use ($router) {
+	$router->get('tasks', 'TasksController@index');
     $router->get('tasks/{id}', 'TasksController@show');
 });
