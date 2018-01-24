@@ -18,7 +18,7 @@ class TaskResource extends Resource
             'id' => (string) $this->id,
             'attributes' => [
                 'title' => $this->title,
-                'completed' => $this->completed
+                'completed' => (bool) $this->completed
             ]
         ];
     }

@@ -21,7 +21,7 @@ class TasksTest extends TestCase
                             'id' => (string) $task->id,
                             'attributes' => [
                                 'title' => $task->title,
-                                'completed' => $task->completed
+                                'completed' => (bool) $task->completed
                             ]
                         ]
                     ]);
