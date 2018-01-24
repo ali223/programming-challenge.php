@@ -29,10 +29,10 @@
     ]
   },
   "scripts": {
-    "post-install-cmd": "vendor/bin/cghooks add --ignore-lock",
-    "post-update-cmd": "vendor/bin/cghooks update",
-    "lint": "./vendor/bin/phpcs --standard=phpcs.xml --colors -p .",
-    "test": "./vendor/bin/phpunit-randomizer -c phpunit.xml --order rand",
+    "post-install-cmd": "cghooks add --ignore-lock",
+    "post-update-cmd": "cghooks update",
+    "lint": "phpcs --standard=phpcs.xml --colors -p .",
+    "test": "phpunit-randomizer -c phpunit.xml --order rand",
     "start": "php -S localhost:8000 -t public",
     "confirm": [
       "@composer run lint",
