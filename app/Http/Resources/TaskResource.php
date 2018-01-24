@@ -16,10 +16,16 @@ class TaskResource extends Resource
         return [
             'type' => 'tasks',
             'id' => (string) $this->id,
+
             'attributes' => [
                 'title' => $this->title,
                 'completed' => (bool) $this->completed
+            ],
+
+            'links' => [
+                'self' => url() . "/api/tasks/{$this->id}"
             ]
+
         ];
     }
 }
