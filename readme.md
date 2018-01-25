@@ -54,7 +54,7 @@ __Example Http Request:__ `GET http://localhost:8000/api/tasks`
 
 Returns a list of all tasks in JSON API format.
 
-```
+```json
 {
     "links": {
         "self": "http://localhost:8000/api/tasks"
@@ -110,7 +110,7 @@ Finds a task resource instance, with the given id, and returns it in JSON API fo
 
 
 
-```
+```json
 {
     "data": {
         "type": "tasks",
@@ -131,7 +131,7 @@ If there is no task with the given id, a __404 Not Found__ Http Response is retu
 
 
 
-```
+```json
 {
     "errors": {
         "status": 404,
@@ -151,7 +151,7 @@ __Example Http Request:__ `POST http://localhost:8000/api/tasks`
 |Content-Type              | application/json       |
 
 __HTTP Request Body__
-```
+```json
 {
     "data": {
         "type": "tasks",
@@ -172,7 +172,7 @@ All the attributes (`"title"` and `"completed"`) are required. And the `"complet
 
 If any of the attributes is missing, a __422 Unprocessable Entity__ Http Response is returned, with an Errors object, like the example below:-
 
-```
+```json
 {
     "errors": {
         "status": 422,
@@ -196,7 +196,7 @@ __Example Http Request:__ `PATCH http://localhost:8000/api/tasks/1`
 |Content-Type              | application/json       |
 
 __HTTP Request Body__
-```
+```json
 {
     "data": {
         "type": "tasks",
@@ -219,7 +219,7 @@ All the attributes (`"title"` and `"completed"`) are optional.
 
 If there is no task with the given id, a __404 Not Found__ Http Response is returned, with an Errors object, like the example below:-
 
-```
+```json
 {
     "errors": {
         "status": 404,
@@ -241,7 +241,7 @@ Deletes a task resource, with the given id. On success, it returns __200 OK__ st
 
 If a task with the given id does not exist, it returns __404 Not Found__ Http Response, with an Errors object, like the example below:-
 
-```
+```json
 {
     "errors": {
         "status": 404,
