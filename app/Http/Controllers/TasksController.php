@@ -18,7 +18,7 @@ class TasksController extends Controller
 
     public function show($id)
     {
-        return new TaskResource(Task::find($id));
+        return new TaskResource(Task::findOrFail($id));
     }
 
     public function store(Request $request)
@@ -35,5 +35,29 @@ class TasksController extends Controller
         ]);
 
         return new TaskResource($task);
+    }
+
+    public function update($id, Request $request)
+    {
+        $this->validate($request, [
+            'data.type' => 'required|in:tasks',
+            'data.id' => 'required|in:' . $id,
+            'data.attributes.completed' => 'boolean'
+        ]);
+
+        $task = Task::findOrFail($id);
+
+        if ($request->has('data.attributes.title')) {
+            $task->title = $request->input('data.attributes.title');
+        }
+
+        if ($request->has('data.attributes.completed')) {
+            $task->completed = $request->input('data.attributes.completed');
+        }
+
+        $task->save();
+
+        return new TaskResource($task);
+
     }
 }
