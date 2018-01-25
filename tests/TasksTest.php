@@ -24,7 +24,7 @@ class TasksTest extends TestCase
                                 'completed' => (bool) $task->completed
                             ],
                             'links' => [
-                                'self' => url() . "/api/tasks/{$task->id}"
+                                'self' => url("/api/tasks/{$task->id}")
                             ]
                         ]
             ]);
@@ -49,7 +49,7 @@ class TasksTest extends TestCase
                                     'completed' => (bool) $tasks[0]->completed,
                                 ],
                                 'links' => [
-                                    'self' => url() . "/api/tasks/{$tasks[0]->id}"
+                                    'self' => url("/api/tasks/{$tasks[0]->id}")
                                 ]
                             ],
                             [
@@ -60,11 +60,32 @@ class TasksTest extends TestCase
                                     'completed' => (bool) $tasks[1]->completed,
                                 ],
                                 'links' => [
-                                    'self' => url() . "/api/tasks/{$tasks[1]->id}"
+                                    'self' => url("/api/tasks/{$tasks[1]->id}")
                                 ]
                             ]
 
                         ]
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_add_a_new_task_in_json_api_format()
+    {
+        $task = factory(Task::class)->make();
+
+        $this->json('POST', "/api/tasks", [
+                        'data' => [
+                            'type' => 'tasks',
+                            'id' => (string) $task->id,
+                            'attributes' => [
+                                'title' => $task->title,
+                                'completed' => (bool) $task->completed
+                            ],
+                        ]
+            ]);
+
+        $this->seeInDatabase('tasks', [
+                'title' => $task->title
             ]);
     }
 

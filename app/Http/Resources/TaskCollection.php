@@ -16,7 +16,7 @@ class TaskCollection extends ResourceCollection
     {
         return [
             'links' => [
-                'self' => url() . '/api/tasks'
+                'self' => url('/api/tasks')
             ],
             'data' => $this->collection
         ];

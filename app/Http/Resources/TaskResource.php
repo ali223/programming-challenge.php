@@ -23,7 +23,7 @@ class TaskResource extends Resource
             ],
 
             'links' => [
-                'self' => url() . "/api/tasks/{$this->id}"
+                'self' => url("/api/tasks/{$this->id}")
             ]
 
         ];
