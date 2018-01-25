@@ -55,6 +55,17 @@ class Handler extends ExceptionHandler
             ], $e->status);
         }
 
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json([
+                'errors' => [
+                    'status' => 404,
+                    'title' => 'Resource Not Found',
+                    'details' => 'Cannot find Resource with the id ' . implode(', ', $e->getIds())
+                ]
+            ], 404);
+        }
+
+
         return parent::render($request, $e);
     }
 }
