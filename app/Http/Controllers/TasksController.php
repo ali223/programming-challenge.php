@@ -58,6 +58,12 @@ class TasksController extends Controller
         $task->save();
 
         return new TaskResource($task);
+    }
 
+    public function destroy($id)
+    {
+        $task = Task::findOrFail($id);
+
+        $task->delete();
     }
 }
