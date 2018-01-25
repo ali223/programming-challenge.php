@@ -68,4 +68,19 @@ class ViewTasksTest extends TestCase
             ]);
     }
 
+    /** @test */
+    public function when_a_user_tries_to_view_a_non_existing_task_a_404_response_is_returned()
+    {        
+        $response = $this->call('GET', "/api/tasks/12345");
+
+        $this->assertEquals(404, $response->status());
+
+        $this->seeJsonEquals([
+            'errors' => [
+                'status' => 404,
+                'title' => 'Resource Not Found',
+                'details' => 'Cannot find Resource with the id 12345'
+            ]
+        ]);
+    }
 }
