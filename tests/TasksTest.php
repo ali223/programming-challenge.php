@@ -76,7 +76,6 @@ class TasksTest extends TestCase
         $this->json('POST', "/api/tasks", [
                         'data' => [
                             'type' => 'tasks',
-                            'id' => (string) $task->id,
                             'attributes' => [
                                 'title' => $task->title,
                                 'completed' => (bool) $task->completed
@@ -84,9 +83,45 @@ class TasksTest extends TestCase
                         ]
             ]);
 
+        $this->seeJsonEquals([
+                    'data' => [
+                        'type' => 'tasks',
+                        'id' => "1",
+                        'attributes' => [
+                            'title' => $task->title,
+                            'completed' => (bool) $task->completed
+                        ],
+                        'links' => [
+                            'self' => url("/api/tasks/1")
+                        ]
+                    ]
+            ]);
+
         $this->seeInDatabase('tasks', [
                 'title' => $task->title
             ]);
     }
 
+    /** @test */
+    public function when_adding_a_new_task_title_and_completed_values_are_required()
+    {
+        $task = factory(Task::class)->make();
+
+        $response = $this->call('POST', "/api/tasks", [
+                        'data' => [
+                            'type' => 'tasks',
+                            'attributes' => [
+                                'title' => '',
+                                'completed' => ''
+                            ],
+                        ]
+            ]);
+
+        $this->assertEquals(422, $response->status());
+
+        $this->seeJson([
+                            'status' => 422,
+                            'title' => 'The given data was invalid.'
+            ]);
+    }
 }
