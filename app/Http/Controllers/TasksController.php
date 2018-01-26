@@ -47,13 +47,8 @@ class TasksController extends Controller
 
         $task = Task::findOrFail($id);
 
-        if ($request->has('data.attributes.title')) {
-            $task->title = $request->input('data.attributes.title');
-        }
-
-        if ($request->has('data.attributes.completed')) {
-            $task->completed = $request->input('data.attributes.completed');
-        }
+        $task->title = $request->input('data.attributes.title', $task->title);
+        $task->completed = $request->input('data.attributes.completed', $task->completed);
 
         $task->save();
 
