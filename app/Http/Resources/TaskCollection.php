@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Resources;
 
-use App\Task;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TaskCollection extends ResourceCollection
