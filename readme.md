@@ -213,7 +213,7 @@ Updates the task resource with the given id. On success, it returns a __200 OK__
 
 The property `"type"` is required and must have the value `"tasks"`.
 
-The property `"id"` is required. Also, <i></i>t must be the id of the task resource instance, which needs to be updated. The `"id"` property value must match with the id in the request url.
+The property `"id"` is required. Also, it must be the id of the task resource instance, which needs to be updated. The `"id"` property value must match with the id in the request url.
 
 All the attributes (`"title"` and `"completed"`) are optional. 
 
